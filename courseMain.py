@@ -4,15 +4,13 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 
 class Course():
-    def __init__(self,userId,passId,chrome):
-        self.userId = userId
-        self.passId = passId
+    def __init__(self,chrome):
         self.driver = chrome
 
-    def login(self):
+    def login(self,userId,passId):
         driver = self.driver
-        userId = self.userId
-        passId = self.passId
+        self.userId = self.userId
+        self.passId = self.passId
         driver.get('https://avenue.mcmaster.ca/?target=%2fd2l%2fhome')
         driver.implicitly_wait(10)
         login = driver.find_element_by_id("login_button")
@@ -29,13 +27,17 @@ class Course():
         submit = driver.find_element_by_id("submit")
         submit.click()
         driver.implicitly_wait(30)
+    
+    def loginDev(self):
+        driver = self.driver
+        driver.get('https://avenue.mcmaster.ca/?target=%2fd2l%2fhome')
 
     def newTab(self):
         self.driver.execute_script("window.open('','_blank');")
 
-    def newTabAndFocus(self):
+    def newTabAndFocus(self,tabnumber):
         self.newTab()
-
+        self.driver.switch_to.window(self.driver.window_handles[tabnumber])
 
     def waitTime(self,amount):
         WebDriverWait(self.driver,amount)
