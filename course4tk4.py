@@ -23,11 +23,11 @@ class Ce4tk4(Course):
             self.driver.implicitly_wait(10)
 
     def getState(self):
-        state = self.driver.wiclndow_handles
+        state = self.driver.window_handles
         print(state)
         currentState = []
         for window in range(len(state)):
-            super().newTabAndFocus(window)
+            super().focusTab(window)
             urls = self.driver.current_url
             currentState.append(urls)
         
