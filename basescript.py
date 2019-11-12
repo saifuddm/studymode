@@ -10,7 +10,7 @@ import time
 driver = webdriver.Chrome(executable_path='/Users/murtmac/Documents/studymode/chromedriver')
 
 main = Ce4tk4(driver)
-main.browser()
+
 
 while(True):
     command = input("Type Command to run: ")
@@ -18,6 +18,10 @@ while(True):
         main.getState()
     elif command == "exportState":
         main.exportState()
+    elif command == "newState":
+        main.browser()
+    elif command == "loadState":
+        main.loadState()
     elif command == "quit":
         main.driver.quit()
         break

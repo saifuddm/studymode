@@ -23,11 +23,11 @@ class Ce4tk4(Course):
             self.driver.implicitly_wait(10)
 
     def getState(self):
-        state = self.driver.window_handles
+        state = self.driver.wiclndow_handles
         print(state)
         currentState = []
         for window in range(len(state)):
-            self.driver.switch_to.window(state[window])
+            super().newTabAndFocus(window)
             urls = self.driver.current_url
             currentState.append(urls)
         
@@ -40,6 +40,20 @@ class Ce4tk4(Course):
             exportstate.write(tabs + '\n')
         
         exportstate.close()
+
+    def loadState(self):
+        previousState = open("exportState.txt",'r')
+        previousStateLinks = []
+        for tabs in previousState:
+            previousStateLinks.append(tabs)
+
+        super().loginDev()
+         # From one to ignore the main login page
+        for i in range(1,len(previousStateLinks)):
+            super().newTabAndFocus(i)
+            self.driver.get(previousStateLinks[i])
+        
+
 
 
 
