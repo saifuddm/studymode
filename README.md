@@ -15,3 +15,4 @@ Automation script for when to enter study mode
 * Get current state of browser and have it export
 * Set up mongoDB
 * Load State for browser
+* Added Simple UI
