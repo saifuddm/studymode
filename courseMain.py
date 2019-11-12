@@ -38,6 +38,9 @@ class Course():
     def newTabAndFocus(self,tabnumber):
         self.newTab()
         self.driver.switch_to.window(self.driver.window_handles[tabnumber])
+    
+    def focusTab(self,tabnumber):
+        self.driver.switch_to.window(self.driver.window_handles[tabnumber])
 
     def waitTime(self,amount):
         WebDriverWait(self.driver,amount)
