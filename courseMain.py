@@ -44,3 +44,34 @@ class Course():
 
     def waitTime(self,amount):
         WebDriverWait(self.driver,amount)
+
+    def getState(self):
+        state = self.driver.window_handles
+        print(state)
+        currentState = []
+        for window in range(len(state)):
+            self.focusTab(window)
+            urls = self.driver.current_url
+            currentState.append(urls)
+        
+        return currentState
+
+    def exportState(self,filename):
+        currentState = self.getState()
+        exportstate = open(filename,"w+")
+        for tabs in currentState:
+            exportstate.write(tabs + '\n')
+        
+        exportstate.close()
+
+    def loadState(self,filename):
+        previousState = open(filename,'r')
+        previousStateLinks = []
+        for tabs in previousState:
+            previousStateLinks.append(tabs)
+
+        self.loginDev()
+         # From one to ignore the main login page
+        for i in range(1,len(previousStateLinks)):
+            self.newTabAndFocus(i)
+            self.driver.get(previousStateLinks[i])
