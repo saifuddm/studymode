@@ -2,6 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
+import pymongo
+from pymongo import MongoClient
 
 class Course():
     def __init__(self,chrome):
@@ -47,7 +49,6 @@ class Course():
 
     def getState(self):
         state = self.driver.window_handles
-        print(state)
         currentState = []
         for window in range(len(state)):
             self.focusTab(window)
@@ -75,3 +76,16 @@ class Course():
         for i in range(1,len(previousStateLinks)):
             self.newTabAndFocus(i)
             self.driver.get(previousStateLinks[i])
+    
+    def mongoUpload(self,mongoClient,database,collections,name):
+        cluster = MongoClient(mongoClient)
+        db  = cluster[database]
+        collection = db[collections]
+        posts = []
+        post = {"_id": name, "name": name, "link": ""}
+        currentState = self.getState()
+        for i in range(len(currentState)):
+            posts.append(post)
+            posts[i]["link"] = currentState[i]
+        
+        collection.insert_many(posts)

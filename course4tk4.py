@@ -4,12 +4,14 @@ from selenium.webdriver.common.action_chains import ActionChains
 from getpass import getpass
 from courseMain import Course
 
+
 class Ce4tk4(Course):
     def __init__(self,chrome):
         self.driver = chrome
         super().__init__(self.driver)
         self.baselinks = ['https://www.ece.mcmaster.ca/~jkzhang/4TK4_Course_digital%20communications.pdf']
         self.filename = "ce4tk4State.txt"
+        self.name = "4TK4"
 
     def browser(self):
         tabnumber = 0
@@ -28,6 +30,12 @@ class Ce4tk4(Course):
     
     def loadSpecificState(self):
         super().loadState(self.filename)
+
+    def mongoSpecificUpload(self,mongoClient,database,collections,name):
+        super().mongoUpload(mongoClient,database,collections,name)
+
+
+
 
 
 
