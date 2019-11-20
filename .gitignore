@@ -3,6 +3,7 @@ test.py
 .vscode/
 *.txt
 parameters.yaml
+mongoDBTest.py
 #From Python.gitignore
 # Byte-compiled / optimized / DLL files
 __pycache__/

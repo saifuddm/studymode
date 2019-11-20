@@ -13,23 +13,23 @@ import PySimpleGUI as sg
 
 driver = webdriver.Chrome(executable_path='/Users/murtmac/Documents/studymode/chromedriver')
 
-
-# Lookup dictionary that maps button to function to call
-dispatch_dictionary = {'LoadState':Ce4tk4(driver).loadSpecificState, 'SaveState':Ce4tk4(driver).exportSpecificState, 'NewState':Ce4tk4(driver).browser, 'MongoUpload':Ce4tk4(driver).mongoSpecificUpload,
-                        'LoadState0':Ce4tl4(driver).loadSpecificState, 'SaveState1':Ce4tl4(driver).exportSpecificState, 'NewState2':Ce4tl4(driver).browser,
-                        'LoadState3':Ce4dk4(driver).loadSpecificState, 'SaveState4':Ce4dk4(driver).exportSpecificState, 'NewState5':Ce4dk4(driver).browser,
-                        'LoadState6':Ce4ek4(driver).loadSpecificState, 'SaveState7':Ce4ek4(driver).exportSpecificState, 'NewState8':Ce4ek4(driver).browser,}
+def lookupFunction(driver):
+    dispatch_dictionary = {'LoadState':Ce4tk4(driver).loadSpecificState, 'SaveState':Ce4tk4(driver).exportSpecificState, 'NewState':Ce4tk4(driver).browser, 'MongoUpload':Ce4tk4(driver).mongoSpecificUpload, 'MongoLoad': Ce4tk4(driver).mongoSpecificLoad,
+                        'LoadState0':Ce4tl4(driver).loadSpecificState, 'SaveState1':Ce4tl4(driver).exportSpecificState, 'NewState2':Ce4tl4(driver).browser, 'MongoUpload3':Ce4tl4(driver).mongoSpecificUpload, 'MongoLoad4': Ce4tl4(driver).mongoSpecificLoad,
+                        'LoadState5':Ce4dk4(driver).loadSpecificState, 'SaveState6':Ce4dk4(driver).exportSpecificState, 'NewState7':Ce4dk4(driver).browser, 'MongoUpload8':Ce4dk4(driver).mongoSpecificUpload, 'MongoLoad9': Ce4dk4(driver).mongoSpecificLoad,
+                        'LoadState10':Ce4ek4(driver).loadSpecificState, 'SaveState11':Ce4ek4(driver).exportSpecificState, 'NewState12':Ce4ek4(driver).browser, 'MongoUpload13':Ce4ek4(driver).mongoSpecificUpload, 'MongoLoad14': Ce4ek4(driver).mongoSpecificLoad}
+    return dispatch_dictionary
 
 # Layout the design of the GUI
-layout = [[sg.Text('Please click a button', auto_size_text=True),sg.Quit(focus=True)],
+layout = [[sg.Text('Please click a button', auto_size_text=True),sg.Quit(focus=True), sg.Button('New')],
           [sg.Text('4TK4')],
-          [sg.Button('LoadState'), sg.Button('SaveState'), sg.Button('NewState'), sg.Button('MongoUpload')],
-          [sg.Text('_'*30)],[sg.Text('4TL4')],
-          [sg.Button('LoadState'), sg.Button('SaveState'), sg.Button('NewState')],
-          [sg.Text('_'*30)],[sg.Text('4DK4')],
-          [sg.Button('LoadState'), sg.Button('SaveState'), sg.Button('NewState')],
-          [sg.Text('_'*30)],[sg.Text('4EK4')],
-          [sg.Button('LoadState'), sg.Button('SaveState'), sg.Button('NewState')]]
+          [sg.Button('LoadState'), sg.Button('SaveState'), sg.Button('NewState'), sg.Button('MongoUpload'), sg.Button('MongoLoad')],
+          [sg.Text('_'*60)],[sg.Text('4TL4')],
+          [sg.Button('LoadState'), sg.Button('SaveState'), sg.Button('NewState'), sg.Button('MongoUpload'), sg.Button('MongoLoad')],
+          [sg.Text('_'*60)],[sg.Text('4DK4')],
+          [sg.Button('LoadState'), sg.Button('SaveState'), sg.Button('NewState'), sg.Button('MongoUpload'), sg.Button('MongoLoad')],
+          [sg.Text('_'*60)],[sg.Text('4EK4')],
+          [sg.Button('LoadState'), sg.Button('SaveState'), sg.Button('NewState'), sg.Button('MongoUpload'), sg.Button('MongoLoad')]]
 
 # Show the Window to the user
 window = sg.Window('StudyMode App', layout)
@@ -41,9 +41,13 @@ while True:
     if event in ('Quit', None):
         driver.quit()
         break
+    if event in ('New', None):
+        driver.quit()
+        driver = webdriver.Chrome(executable_path='/Users/murtmac/Documents/studymode/chromedriver')
+        continue
     # Lookup event in function dictionary
-    if event in dispatch_dictionary:
-        func_to_call = dispatch_dictionary[event]   # get function from dispatch dictionary
+    if event in lookupFunction(driver):
+        func_to_call = lookupFunction(driver)[event]   # get function from dispatch dictionary
         func_to_call()
     else:
         print('Event {} not in dispatch dictionary'.format(event))

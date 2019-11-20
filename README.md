@@ -6,7 +6,6 @@ Automation script for when to enter study mode
 
 * Open up document
 * have it close ~~all links and~~ files
-* mongoDB extract and load 
 
 
 # Things Added:
@@ -18,7 +17,12 @@ Automation script for when to enter study mode
 * Added parameters.yaml file containg mongoDB connections
 * have classes for each course
 * Send export state to mongoDB
+* mongoDB extract and load 
+
 
 # Imporve Features (ToDo):
 * Disconnet the the app from the database by having it call node.js server and send it json data.
 * Use of firebase to do authentication for user/pass for avenue
+
+# BUGS
+* MongoLoad will open an extra new tab

@@ -94,11 +94,21 @@ class Course():
     def mongoClear(self,name):
         self.collection.delete_many({"name": name})
 
+    def mongoLoad(self,name):
+        self.mongoConnect()
+        results = self.collection.find({"name":name})
+        previousStateLinks = []
+        for result in results:
+            previousStateLinks.append(result["link"])
+
+        for i in range(len(previousStateLinks)):
+            self.newTabAndFocus(i)
+            self.driver.get(previousStateLinks[i])
+
     def mongoConnect(self):
         self.cluster = MongoClient(self.mongoClient)
         self.db  = self.cluster[self.database]
         self.collection = self.db[self.collections]
-
 
     def parameterLoad(self):
         with open(r'parameters.yaml') as file:

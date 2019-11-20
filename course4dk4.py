@@ -32,6 +32,9 @@ class Ce4dk4(Course):
 
     def mongoSpecificUpload(self):
         super().mongoUpload(self.name)
+    
+    def mongoSpecificLoad(self):
+        super().mongoLoad(self.name)
 
         
 
