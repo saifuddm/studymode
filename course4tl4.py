@@ -10,6 +10,7 @@ class Ce4tl4(Course):
         super().__init__(self.driver)
         self.baselinks = ['https://www.ece.mcmaster.ca/~jkzhang/4TL4_DSP.pdf']
         self.filename = "ce4tl4State.txt"
+        self.name = "4TL4"
         
     def browser(self):
         tabnumber = 0
@@ -29,7 +30,8 @@ class Ce4tl4(Course):
     def loadSpecificState(self):
         super().loadState(self.filename)
 
-        
+    def mongoSpecificUpload(self):
+        super().mongoUpload(self.name)       
 
 
 

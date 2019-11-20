@@ -10,6 +10,7 @@ class Ce4ek4(Course):
         super().__init__(self.driver)
         self.baselinks = ['https://mail.google.com/']
         self.filename = "ce4ek4State.txt"
+        self.name = "4EK4"
 
     def browser(self):
         tabnumber = 0
@@ -28,6 +29,9 @@ class Ce4ek4(Course):
     
     def loadSpecificState(self):
         super().loadState(self.filename)
+    
+    def mongoSpecificUpload(self):
+        super().mongoUpload(self.name)
 
         
 

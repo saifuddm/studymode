@@ -15,7 +15,7 @@ driver = webdriver.Chrome(executable_path='/Users/murtmac/Documents/studymode/ch
 
 
 # Lookup dictionary that maps button to function to call
-dispatch_dictionary = {'LoadState':Ce4tk4(driver).loadSpecificState, 'SaveState':Ce4tk4(driver).exportSpecificState, 'NewState':Ce4tk4(driver).browser,
+dispatch_dictionary = {'LoadState':Ce4tk4(driver).loadSpecificState, 'SaveState':Ce4tk4(driver).exportSpecificState, 'NewState':Ce4tk4(driver).browser, 'MongoUpload':Ce4tk4(driver).mongoSpecificUpload,
                         'LoadState0':Ce4tl4(driver).loadSpecificState, 'SaveState1':Ce4tl4(driver).exportSpecificState, 'NewState2':Ce4tl4(driver).browser,
                         'LoadState3':Ce4dk4(driver).loadSpecificState, 'SaveState4':Ce4dk4(driver).exportSpecificState, 'NewState5':Ce4dk4(driver).browser,
                         'LoadState6':Ce4ek4(driver).loadSpecificState, 'SaveState7':Ce4ek4(driver).exportSpecificState, 'NewState8':Ce4ek4(driver).browser,}
@@ -23,7 +23,7 @@ dispatch_dictionary = {'LoadState':Ce4tk4(driver).loadSpecificState, 'SaveState'
 # Layout the design of the GUI
 layout = [[sg.Text('Please click a button', auto_size_text=True),sg.Quit(focus=True)],
           [sg.Text('4TK4')],
-          [sg.Button('LoadState'), sg.Button('SaveState'), sg.Button('NewState')],
+          [sg.Button('LoadState'), sg.Button('SaveState'), sg.Button('NewState'), sg.Button('MongoUpload')],
           [sg.Text('_'*30)],[sg.Text('4TL4')],
           [sg.Button('LoadState'), sg.Button('SaveState'), sg.Button('NewState')],
           [sg.Text('_'*30)],[sg.Text('4DK4')],
