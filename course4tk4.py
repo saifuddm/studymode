@@ -31,8 +31,8 @@ class Ce4tk4(Course):
     def loadSpecificState(self):
         super().loadState(self.filename)
 
-    def mongoSpecificUpload(self,mongoClient,database,collections,name):
-        super().mongoUpload(mongoClient,database,collections,name)
+    def mongoSpecificUpload(self):
+        super().mongoUpload(self.name)
 
 
 

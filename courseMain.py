@@ -4,15 +4,17 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 import pymongo
 from pymongo import MongoClient
+import yaml
 
 class Course():
     def __init__(self,chrome):
         self.driver = chrome
+        self.parameterLoad()
 
-    def login(self,userId,passId):
+    def login(self):
         driver = self.driver
-        self.userId = self.userId
-        self.passId = self.passId
+        userId = self.userId
+        passId = self.passId
         driver.get('https://avenue.mcmaster.ca/?target=%2fd2l%2fhome')
         driver.implicitly_wait(10)
         login = driver.find_element_by_id("login_button")
@@ -54,7 +56,6 @@ class Course():
             self.focusTab(window)
             urls = self.driver.current_url
             currentState.append(urls)
-        
         return currentState
 
     def exportState(self,filename):
@@ -77,15 +78,34 @@ class Course():
             self.newTabAndFocus(i)
             self.driver.get(previousStateLinks[i])
     
-    def mongoUpload(self,mongoClient,database,collections,name):
-        cluster = MongoClient(mongoClient)
-        db  = cluster[database]
-        collection = db[collections]
+    def mongoUpload(self,name):
+        self.mongoConnect()
+        self.mongoClear(name)
         posts = []
-        post = {"_id": name, "name": name, "link": ""}
         currentState = self.getState()
+        print(len(currentState))
         for i in range(len(currentState)):
-            posts.append(post)
-            posts[i]["link"] = currentState[i]
+            # INTRESTINGFACT:
+            # appending a dict into a list creates a refrence
+            posts.append({"_id": name + str(i), "name": name, "link": currentState[i]})
         
-        collection.insert_many(posts)
+        self.collection.insert_many(posts)
+
+    def mongoClear(self,name):
+        self.collection.delete_many({"name": name})
+
+    def mongoConnect(self):
+        self.cluster = MongoClient(self.mongoClient)
+        self.db  = self.cluster[self.database]
+        self.collection = self.db[self.collections]
+
+
+    def parameterLoad(self):
+        with open(r'parameters.yaml') as file:
+            lists = yaml.load(file,Loader=yaml.FullLoader)
+
+        self.mongoClient = lists['mongoClient']
+        self.database = lists['db']
+        self.collections = lists['collection']
+        self.userId = lists['user']
+        self.passId = lists['pass']
