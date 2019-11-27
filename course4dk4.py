@@ -14,10 +14,9 @@ class Ce4dk4(Course):
         
     def browser(self):
         tabnumber = 0
-        # super().login(userId,passId)
+        super().login()
         # userId = input("Type your username: ")
         # passId = getpass()
-        super().loginDev()
         for i in self.baselinks:
             tabnumber = tabnumber + 1
             super().newTabAndFocus(tabnumber)

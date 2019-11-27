@@ -6,6 +6,7 @@ Automation script for when to enter study mode
 
 * Open up document
 * have it close ~~all links and~~ files
+* have property when saving to mongo about tabnumber
 
 
 # Things Added:
@@ -26,3 +27,4 @@ Automation script for when to enter study mode
 
 # BUGS
 * MongoLoad will open an extra new tab
+* MongoLoad doesn not load into correct order

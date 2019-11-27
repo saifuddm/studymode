@@ -101,6 +101,7 @@ class Course():
         for result in results:
             previousStateLinks.append(result["link"])
 
+        self.login()
         for i in range(len(previousStateLinks)):
             self.newTabAndFocus(i)
             self.driver.get(previousStateLinks[i])
